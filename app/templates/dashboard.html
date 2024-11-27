@@ -1,0 +1,83 @@
+{% include 'panel.header.html' %}
+<div class="container my-4">
+  <hr />
+  
+  <!-- Ask AI Form Section -->
+  <div class="mb-4">
+    <h3 class="text-primary">Ask AI</h3>
+    <form action="{{ url_for('recommend')}}" method="POST" class="bg-light p-3 rounded shadow-sm">
+      <div class="row g-3">
+        <div class="col-md">
+          <label for="daytype" class="form-label">Day Type</label>
+          <select name="daytype" id="daytype" class="form-select">
+            <option value="" selected>Select a day type</option>
+            <option value="Weekend">Weekend</option>
+            <option value="Weekday">Weekday</option>
+          </select>
+        </div>
+        
+        <div class="col-md">
+          <label for="daypart" class="form-label">Day Part</label>
+          <select name="daypart" id="daypart" class="form-select">
+            <option value="" selected>Select a time of day</option>
+            <option value="Morning">Morning</option>
+            <option value="Afternoon">Afternoon</option>
+            <option value="Evening">Evening</option>
+            <option value="Night">Night</option>
+          </select>
+        </div>
+        
+        <div class="col-md">
+          <label for="season" class="form-label">Season</label>
+          <select name="season" id="season" class="form-select">
+            <option value="" selected>Select a season</option>
+            <option value="Summer">Summer</option>
+            <option value="Autumn">Autumn</option>
+            <option value="Winter">Winter</option>
+            <option value="Spring">Spring</option>
+          </select>
+        </div>
+        
+        <div class="col-md-auto">
+          <button type="submit" class="btn btn-success mt-4">Find</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- AI Suggestion Section -->
+  <div class="bg-white p-4 rounded shadow-sm">
+    <h3 class="text-primary"><u>AI Suggestion</u></h3>
+    <p class="text-muted">
+      The model predicts which food items to sell using a clustering algorithm called 
+      <strong>K-Means</strong>. First, historical sales data is collected and preprocessed, 
+      including creating features like day type (weekend or weekday), day part (breakfast, lunch, 
+      dinner), and season. K-Means is then applied to group similar sales patterns based on these features.
+    </p>
+    <hr />
+    <p class="lead">
+      Looking for fast food recommendations for a 
+      <strong>{{ daytype }}</strong> during 
+      <strong>{{ daypart }}</strong> in 
+      <strong>{{ season }}</strong>? Here’s our suggestion for you.
+    </p>
+    
+    <!-- Recommendations List -->
+    <div class="bg-light p-3 rounded shadow-sm">
+      <h4 class="text-secondary">Recommended Food</h4>
+      {% if items %}
+      <ul class="list-group list-group-flush">
+        {% for item in items %}
+          <li class="list-group-item">{{ item }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="text-muted">No recommendations available for the selected options.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>

@@ -1,0 +1,79 @@
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import LabelEncoder
+from imblearn.over_sampling import RandomOverSampler
+from sklearn.metrics import silhouette_score
+
+
+# Load the data
+data = pd.read_csv('dataset.csv')
+
+# Dictionary to map input strings to corresponding codes
+daypart_map = {'Night': 3, 'Morning': 2, 'Afternoon': 1, 'Evening': 0}
+daytype_map = {'Weekend': 0, 'Weekday': 1}
+season_map = {'Spring': 0, 'Summer': 1, 'Autumn': 2, 'Winter': 3}
+
+# Preprocess the data
+data['Daypart'] = data['Daypart'].map(daypart_map)
+data['DayType'] = data['DayType'].map(daytype_map)
+data['Season'] = data['Season'].map(season_map)
+
+# Fill missing values with their respective mode
+data['Daypart'] = data['Daypart'].fillna(data['Daypart'].mode()[0])
+data['DayType'] = data['DayType'].fillna(data['DayType'].mode()[0])
+data['Season'] = data['Season'].fillna(data['Season'].mode()[0])
+
+# Feature selection
+X = data[['Daypart', 'DayType', 'Season']]
+y = data['Items']
+
+# Encode the target variable
+label_encoder = LabelEncoder()
+y_encoded = label_encoder.fit_transform(y)
+
+# Create an oversampler
+ros = RandomOverSampler(random_state=42)
+
+# Fit and resample
+X_resampled, y_resampled = ros.fit_resample(X, y_encoded)
+
+# Scale the features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_resampled)
+
+# Determine the optimal number of clusters (optional)
+# You can use silhouette score or elbow method to find the best k
+kmeans = KMeans(n_clusters=5, random_state=42)  # Change n_clusters as needed
+kmeans.fit(X_scaled)
+
+# Assign clusters to the original data
+data['Cluster'] = kmeans.predict(scaler.transform(X))
+silhouette_avg = silhouette_score(X_scaled, kmeans.labels_)
+print(f'Silhouette Score: {silhouette_avg}')
+
+# Function to recommend items based on clustering
+def recommend_items(daypart, daytype, season, top_n=5):
+    # Convert inputs to codes
+    daypart_code = daypart_map[daypart]
+    daytype_code = daytype_map[daytype]
+    season_code = season_map[season]
+
+    # Create input data for prediction
+    input_data = pd.DataFrame([[daypart_code, daytype_code, season_code]], columns=['Daypart', 'DayType', 'Season'])
+    input_scaled = scaler.transform(input_data)
+
+    # Predict the cluster for the input data
+    cluster_label = kmeans.predict(input_scaled)[0]
+
+    # Recommend items from the same cluster
+    recommended_items = data[data['Cluster'] == cluster_label]['Items'].value_counts().head(top_n).index.tolist()
+
+    return recommended_items
+
+# Example usage
+recommended_items = recommend_items('Afternoon', 'Weekend', 'Spring', top_n=5)
+print(f'Recommended best-selling items: {recommended_items}')

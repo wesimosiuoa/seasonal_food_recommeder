@@ -1,0 +1,93 @@
+{% include 'panel.header.html' %}
+<style>
+    body {
+        background-color: #f8f9fa; /* Light background for contrast */
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+    h1 {
+        margin-top: 20px;
+        text-align: center;
+        color: #007bff; /* Bootstrap primary color */
+        font-weight: bold;
+    }
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #495057;
+    }
+    .card img {
+        border-radius: 10px;
+        height: auto;
+        max-width: 100%;
+    }
+    .text-muted {
+        color: #6c757d;
+    }
+</style>
+<div class="container">
+    <h1>Analysis of Seasonal Preferences</h1>
+    
+    <div class="row mt-4">
+        <!-- Stacked Bar Chart -->
+        <div class="col-md-6">
+            <div class="card">
+                <img src="static/images/stacked_bar_chart.png" class="card-img-top" alt="Stacked Bar Chart">
+                <div class="card-body">
+                    <h5 class="card-title">Seasonal Contribution of Each Item</h5>
+                    <p class="card-text text-muted">This stacked bar chart represents the seasonal contribution of top items, highlighting which items perform best in each season.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="col-md-6">
+            <div class="card">
+                <img src="static/images/bar_chart.png" class="card-img-top" alt="Top 5 Items per Season">
+                <div class="card-body">
+                    <h5 class="card-title">Top 5 Items per Season</h5>
+                    <p class="card-text text-muted">This bar chart shows the top five items for each season, allowing you to identify seasonal favorites.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <!-- Line Graph -->
+        <div class="col-md-6">
+            <div class="card">
+                <img src="static/images/line_graph.png" class="card-img-top" alt="Seasonal Trend of Top Items">
+                <div class="card-body">
+                    <h5 class="card-title">Seasonal Trend of Top Items</h5>
+                    <p class="card-text text-muted">The line graph illustrates the seasonal trends for popular items like coffee, bread, and tea, showing demand fluctuations across the year.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie Charts -->
+        <div class="col-md-6">
+            <div class="card">
+                <img src="static/images/pie_charts.png" class="card-img-top" alt="Proportion of Each Item per Season">
+                <div class="card-body">
+                    <h5 class="card-title">Proportion of Each Item per Season</h5>
+                    <p class="card-text text-muted">These pie charts display the proportions of each item within each season, giving an at-a-glance view of item popularity across seasons.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

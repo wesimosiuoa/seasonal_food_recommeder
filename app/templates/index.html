@@ -1,0 +1,76 @@
+{% include 'home-header.html' %}<!-- Hero Section -->
+<!-- <div class="hero text-center">
+  <h1> Rea u amoholea </h1>
+</div> -->
+
+<!-- Featured Plants Section -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Rekisa lijo tsa hau le rona</h2>
+  <div class="row">
+    <!-- Plant 1 -->
+    <div class="col-md-4">
+      <div class="card plant-card">
+        <img
+          src="static/img/WhatsApp Image 2024-09-21 at 14.11.10.jpeg"
+          class="card-img-top"
+          alt="Plant 1"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Selae Tapole</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Architecto, voluptatem? Alias impedit non consequuntur, ipsum sunt
+            deleniti at ullam aut obcaecati consequatur illo minus officia
+            architecto nisi asperiores? Quis, impedit?
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Plant 2 -->
+    <div class="col-md-4">
+      <div class="card plant-card">
+        <img
+          src="static/img/WhatsApp Image 2024-09-21 at 14.11.41.jpeg"
+          class="card-img-top"
+          alt="Plant 2"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Linoa Mapholi</h5>
+          <p class="card-text">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt,
+            porro? Delectus alias excepturi, numquam ipsam nobis veritatis
+            consequuntur enim maxime, fugiat facere, rerum voluptatem corporis
+            magni! Aliquam ab quia consectetur.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Plant 3 -->
+    <div class="col-md-4">
+      <div class="card plant-card">
+        <img
+          src="static/img/WhatsApp Image 2024-09-21 at 14.08.57.jpeg"
+          class="card-img-top"
+          alt="Plant 3"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Khoho e Halikoeng</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
+            voluptas fugiat, similique consectetur reiciendis totam magni
+            aliquam autem aperiam, numquam architecto odio dolore, modi illo
+            nulla aliquid distinctio vitae quae!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer with Auth Links -->
+<div class="container text-center auth-links">
+  <p>
+    Already have an account? <a href="{{ url_for ('signin') }}">Login</a> |
+    <a href="../public/sign-up.php">Register</a>
+  </p>
+</div>
